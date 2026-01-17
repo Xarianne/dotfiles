@@ -23,4 +23,12 @@ flatpak = [
   { package = "org.localsend.localsend_app", options = { systemwide = true } },
   { package = "org.onlyoffice.desktopeditors", options = { systemwide = true } },
   { package = "page.tesk.Refine", options = { systemwide = true } },
+  { package = "org.gnome.TextEditor", options = { systemwide = true } },
+  { package = "org.gnome.Snapshot", options = { systemwide = true } },
+  { package = "org.gnome.NautilusPreviewer", options = { systemwide = true } },
+  { package = "org.gnome.Calculator", options = { systemwide = true } },
+  { package = "com.visualstudio.code", options = { systemwide = true } },
+  { package = "org.gnome.Characters", options = { systemwide = true } },
+  { package = "org.gnome.Logs", options = { systemwide = true } },
+  { package = "org.gnome.Papers", options = { systemwide = true } },
 ]
