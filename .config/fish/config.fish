@@ -36,3 +36,5 @@ function fish_greeting
         fastfetch
     end
 end
+
+alias code='flatpak run com.visualstudio.code'
