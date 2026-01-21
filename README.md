@@ -16,4 +16,4 @@ sudo dnf install just git
 ```
 just --choose
 ```
-Pick bootstrap.
+Pick `setup-system`.
