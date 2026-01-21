@@ -7,7 +7,7 @@
 bootstrap:
     @echo "Starting System Bootstrap..."
     
-    # 1. Install Yadm (Git Clone Method)
+    # 1. Install Yadm (Skipped if already installed)
     @if ! command -v yadm >/dev/null; then \
         echo "Installing Yadm..."; \
         git clone https://github.com/yadm-dev/yadm.git ~/.yadm-project; \
@@ -15,12 +15,16 @@ bootstrap:
         ln -s ~/.yadm-project/yadm ~/.local/bin/yadm; \
     fi
 
-    # 2. Clone Dotfiles (The Real Install)
-    # We clone into Home, overwriting this temporary repo we are running from
-    @echo "Cloning Dotfiles..."
-    yadm clone https://github.com/Xarianne/fedora-dotfiles.git
+    # 2. Clone Dotfiles (The fix is here)
+    @echo "Ensuring Dotfiles are present..."
+    # If the clone fails (because it's already there), we print a message and continue.
+    @yadm clone https://github.com/Xarianne/fedora-dotfiles.git || echo "⚠️  Repo already exists. Skipping clone."
 
-    # 3. Snapshot Base OS
+    # 3. Finalize State
+    # This is important: even if we didn't clone just now, we force the files to match.
+    @yadm reset --hard HEAD
+
+    # 4. Snapshot Base OS
     @echo "Installing Metapac..."
     @sudo dnf install cargo gcc openssl-devel -y
     @cargo install metapac || true
@@ -32,7 +36,7 @@ bootstrap:
         echo "Base OS secured."; \
     fi
 
-    # 4. Handoff
+    # 5. Handoff
     @echo "Bootstrap Complete. Handing off to Setup..."
     @just setup-system
 
