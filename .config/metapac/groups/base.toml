@@ -115,7 +115,7 @@ dnf = [
   "filesystem",
   "firefox",
   "firewalld",
-  "firewall-config"
+  "firewall-config",
   "fish",
   "flatseal",
   "flex",

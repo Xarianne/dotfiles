@@ -2,7 +2,9 @@ dnf = [
   "distrobox",
   "fedora-packager",
   "fedpkg",
-  "mock",
-  "just",
   "gum",
+  "just",
+  "meld",
+  "mock", 
+  "rpmconf",
 ]
