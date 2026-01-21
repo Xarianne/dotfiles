@@ -3,5 +3,6 @@ dnf = [
   "fedora-packager",
   "fedpkg",
   "mock",
-  "just"
+  "just",
+  "gum",
 ]
