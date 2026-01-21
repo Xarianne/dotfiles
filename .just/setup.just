@@ -20,16 +20,15 @@ bootstrap:
     @echo "Installing Metapac..."
     @sudo dnf install cargo gcc openssl-devel -y
     
-    # FIX: Run 'cargo' directly (it's in /usr/bin), but verify installation first
     @echo "Building Metapac binary..."
     @cargo install metapac || true
     
     # 3. Snapshot Base OS
     @echo "Snapshotting Base OS..."
     @mkdir -p ~/.config/metapac/groups
+    # Note: We use the full path (~/.cargo/bin/metapac) because PATH isn't updated yet
     @if [ ! -f ~/.config/metapac/groups/base.toml ]; then \
         echo "   Generating snapshot..."; \
-        # FIX: Metapac LIVES in ~/.cargo/bin, so we use the full path here
         ~/.cargo/bin/metapac unmanaged > ~/.config/metapac/groups/base.toml; \
         echo "   Base OS secured."; \
     fi
@@ -47,7 +46,6 @@ setup-system: setup-shell setup-repos install-cargo-tools sync
 
 setup-shell:
     @echo "Configuring Shell..."
-    @# FIX: Use 'current_user' variable to guarantee we get the right name
     @if [ "$$SHELL" != "/usr/bin/fish" ]; then \
         echo "Changing shell to Fish..."; \
         sudo lchsh {{current_user}} /usr/bin/fish; \
@@ -79,11 +77,10 @@ setup-repos:
 
 install-cargo-tools:
     @echo "Installing Cargo tools..."
-    # FIX: Use 'cargo' (system) to install 'topgrade' (user binary)
     @cargo install cargo-update || true
     @cargo install topgrade || true
 
 sync:
     @echo "Syncing Packages..."
-    # FIX: Point to the user binary path
+    # No sudo needed for metapac sync
     ~/.cargo/bin/metapac sync
