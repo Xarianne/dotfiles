@@ -26,14 +26,14 @@ bootstrap:
     # 3. Snapshot Base OS
     @echo "Snapshotting Base OS..."
     @mkdir -p ~/.config/metapac/groups
-    # Note: We use the full path (~/.cargo/bin/metapac) because PATH isn't updated yet
+    # Use full path because PATH isn't updated yet
     @if [ ! -f ~/.config/metapac/groups/base.toml ]; then \
         echo "   Generating snapshot..."; \
         ~/.cargo/bin/metapac unmanaged > ~/.config/metapac/groups/base.toml; \
         echo "   Base OS secured."; \
     fi
 
-# 4. Run Setup
+    # 4. Run Setup
     @just setup-system
 
 # =============================================================================
