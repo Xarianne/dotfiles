@@ -33,8 +33,7 @@ bootstrap:
         echo "   Base OS secured."; \
     fi
 
-    # 4. Handoff
-    @echo "Bootstrap Complete. Handing off to Setup..."
+# 4. Run Setup
     @just setup-system
 
 # =============================================================================
@@ -48,7 +47,7 @@ setup-shell:
     @echo "Configuring Shell..."
     @if [ "$$SHELL" != "/usr/bin/fish" ]; then \
         echo "Changing shell to Fish..."; \
-        sudo lchsh {{current_user}} /usr/bin/fish; \
+        sudo usermod --shell /usr/bin/fish {{current_user}}; \
     fi
 
 setup-repos:
