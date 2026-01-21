@@ -2,8 +2,10 @@
 
 set shell := ["bash", "-c"]
 
-import ".just/setup.just"
+import ".just/00_setup.just"
 import ".just/maintenance.just"
+import ".just/dev.just"
+import ".just/apps.just"
 
 # Default Menu
 _default:
