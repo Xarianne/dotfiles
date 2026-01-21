@@ -90,13 +90,18 @@ setup-repos:
     # Flatpak Cleanup
     @echo "Configuring Flatpaks..."
     @flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    
+    # CRITICAL: Download the app catalog so Metapac can find packages
+    @echo "Refreshing Flatpak catalog..."
+    @flatpak update --appstream
+
     @if flatpak remote-list | grep -q "fedora"; then \
         flatpak remote-delete fedora --force; \
     fi
     @if flatpak remote-list | grep -q "fedora-testing"; then \
         flatpak remote-delete fedora-testing --force; \
     fi
-
+    
 install-cargo-tools:
     @echo "Checking Cargo Tools..."
     @if ! [ -f ~/.cargo/bin/cargo-install-update ]; then \
