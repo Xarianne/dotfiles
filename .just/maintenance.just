@@ -1,15 +1,20 @@
-# MAINTENANCE
+# ~/.just/maintenance.just
 
 # Full System Update
 update:
-    @echo "Creating safety snapshot..."
-    sudo snapper -c root create -d "Pre-Update"
     @echo "Running Topgrade..."
     topgrade
-    @echo "Cleaning up..."
+    
+    @echo "Syncing package state with Metapac..."
+    ~/.cargo/bin/metapac sync
+    
+    @echo "Cleaning up dnf orphans and cache..."
     sudo dnf autoremove -y
+    sudo dnf clean packages
+    
+    @echo "Update and cleanup complete."
 
 # Utils
 check-path:
     @echo "Checking for shadowed binaries..."
-    @type -a curl python3 git
+    @type -a curl python3 git just yadm metapac

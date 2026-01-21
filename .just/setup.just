@@ -5,46 +5,38 @@ fedora_ver := shell("rpm -E %fedora")
 current_user := shell("whoami")
 
 # =============================================================================
-# BOOTSTRAP (Post-Clone)
+# FULL SYSTEM SETUP
 # =============================================================================
 
-bootstrap:
-    @echo "Initializing System State..."
-    
-    # 1. Finalize Yadm State
-    @echo "Aligning Dotfiles..."
-    @yadm clone https://github.com/Xarianne/fedora-dotfiles.git || echo "Repo already exists. Skipping clone."
-    @yadm reset --hard HEAD
+# Full System Setup: Prepares configurations and provisions the machine
+setup-system: _init setup-shell setup-repos install-cargo-tools _sync
+    @echo "Provisioning Complete. Please reboot your machine."
 
-    # 2. Install Metapac
-    @echo "Checking Metapac installation..."
+# =============================================================================
+# SETUP STEPS
+# =============================================================================
+
+# Internal: Prepare configurations (Yadm, Metapac, and Base Snapshot)
+_init:
+    @echo "--------------------------------------------------------"
+    @echo "REMINDER: Ensure yadm is installed before proceeding."
+    @echo "See README from dotfiles repo"
+    @echo "--------------------------------------------------------"
+
+    @echo "Preparing configurations..."
+    # Finalize Yadm State
+    @yadm clone https://github.com/Xarianne/dotfiles.git || echo "Repo already exists."
+    @yadm reset --hard HEAD
+    # Install Metapac
     @if ! command -v ~/.cargo/bin/metapac >/dev/null; then \
-        echo "Installing Metapac..."; \
         sudo dnf install cargo gcc openssl-devel -y; \
-        cargo install metapac; \
-    else \
-        echo "Metapac is already installed."; \
+        cargo install metapac || true; \
     fi
-    
-    # 3. Snapshot Base OS
+    # Snapshot Base OS
     @mkdir -p ~/.config/metapac/groups
     @if [ ! -f ~/.config/metapac/groups/base.toml ]; then \
-        echo "Snapshotting Base OS..."; \
         ~/.cargo/bin/metapac unmanaged > ~/.config/metapac/groups/base.toml; \
-        echo "Base OS secured."; \
-    else \
-        echo "Base OS snapshot already exists."; \
     fi
-
-    # 4. Run Setup
-    @just setup-system
-
-# =============================================================================
-# SYSTEM SETUP
-# =============================================================================
-
-setup-system: setup-shell setup-repos install-cargo-tools sync
-    @echo "Day 0 Provisioning Complete. Please reboot your machine."
 
 setup-shell:
     @echo "Checking User Shell..."
@@ -115,6 +107,6 @@ install-cargo-tools:
         echo "topgrade is already installed."; \
     fi
 
-sync:
+_sync:
     @echo "Syncing Packages..."
     @~/.cargo/bin/metapac sync

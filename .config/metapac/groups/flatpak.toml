@@ -9,7 +9,6 @@ flatpak = [
   { package = "io.github.flattool.Ignition" },
   { package = "io.github.flattool.Warehouse" },
   { package = "io.github.plrigaux.sysd-manager" },
-  { package = "io.github.radiolamp.mangojuice" },
   { package = "io.github.tobagin.keysmith" },
   { package = "io.github.ungoogled_software.ungoogled_chromium" },
   { package = "io.podman_desktop.PodmanDesktop" },
@@ -21,4 +20,5 @@ flatpak = [
   { package = "page.tesk.Refine" },
   { package = "com.visualstudio.code" },
   { package = "org.gnome.World.PikaBackup" },
+  { package = "io.github.radiolamp.mangojuice" }
 ]
