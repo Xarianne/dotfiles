@@ -15,6 +15,6 @@ update:
     @echo "Update and cleanup complete."
 
 # Utils
-check-path:
-    @echo "Checking for shadowed binaries..."
+check-duplicates:
+    @echo "Checking for duplicate binaries..."
     @type -a curl python3 git just yadm metapac
