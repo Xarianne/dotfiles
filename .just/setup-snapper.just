@@ -2,22 +2,21 @@
 # Based on guide: "How to Install Fedora 42 with Snapshot and Rollback Support"
 
 # The main workflow command
-setup-snapper: show-grub install-deps config-dnf config-snapper config-updatedb install-grub-btrfs enable-timers
-    @echo "✅ Setup complete! A reboot is recommended to verify the GRUB menu."
+setup-snapper: _show-grub _install-deps _config-dnf _config-snapper _config-updatedb _install-grub-btrfs _enable-timers
+    @echo "Setup complete! A reboot is recommended to verify the GRUB menu."
 
 # Section 3: Post-Installation Configuration
-show-grub:
+_show-grub:
     @echo "Step 1: Unhiding GRUB menu..."
     sudo grub2-editenv - unset menu_auto_hide
 
 # Section 5: Install necessary packages
-install-deps:
+_install-deps:
     @echo "Step 2: Installing dependencies..."
     sudo dnf install -y snapper libdnf5-plugin-actions btrfs-assistant inotify-tools git make
 
 # Section 5: Set Up Automatic Snapshot Creation with DNF
-# FIXED: Added shebang (#!/usr/bin/env bash) to treat this block as a single script
-config-dnf:
+_config-dnf:
     #!/usr/bin/env bash
     echo "Step 3: Configuring DNF snapshot hooks..."
     sudo mkdir -p /etc/dnf/libdnf5-plugins/actions.d/
@@ -36,7 +35,7 @@ config-dnf:
     sudo chmod 644 /etc/dnf/libdnf5-plugins/actions.d/snapper.actions
 
 # Section 5: Create Snapper Configurations
-config-snapper:
+_config-snapper:
     @echo "Step 4: Configuring Snapper for root and home..."
     # Create configs if they don't exist (ignore error if they do)
     sudo snapper -c root create-config / || echo "Root config likely exists, skipping creation."
@@ -53,14 +52,14 @@ config-snapper:
     sudo snapper -c home set-config ALLOW_USERS=$(whoami) SYNC_ACL=yes
 
 # Section 5: Configure updatedb
-config-updatedb:
+_config-updatedb:
     @echo "Step 5: Excluding snapshots from updatedb..."
     if ! grep -q 'PRUNENAMES = ".snapshots"' /etc/updatedb.conf; then \
         echo 'PRUNENAMES = ".snapshots"' | sudo tee -a /etc/updatedb.conf; \
     fi
 
 # Section 5: Install and Configure grub-btrfs
-install-grub-btrfs:
+_install-grub-btrfs:
     @echo "Step 6: Installing grub-btrfs..."
     rm -rf /tmp/grub-btrfs
     git clone https://github.com/Antynea/grub-btrfs /tmp/grub-btrfs
@@ -81,7 +80,7 @@ install-grub-btrfs:
     sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Section 6: Enable Systemd Timers & Services
-enable-timers:
+_enable-timers:
     @echo "Step 7: Enabling systemd timers and services..."
     sudo systemctl enable --now snapper-timeline.timer
     sudo systemctl enable --now snapper-cleanup.timer
