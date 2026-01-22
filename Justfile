@@ -8,6 +8,8 @@ import ".just/dev.just"
 import ".just/apps.just"
 import ".just/firewall.just"
 import ".just/setup-snapper.just"
+import ".just/update.just"
+import ".just/verify-state.just"
 
 # Default Menu
 _default:
