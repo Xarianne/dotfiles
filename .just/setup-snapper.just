@@ -68,7 +68,7 @@ _install-grub-btrfs:
     cd /tmp/grub-btrfs && sed -i.bkp \
         -e '/^#GRUB_BTRFS_SNAPSHOT_KERNEL_PARAMETERS/s/^#//' \
         -e 's/#GRUB_BTRFS_MKCONFIG=.*/GRUB_BTRFS_MKCONFIG=\/usr\/sbin\/grub2-mkconfig/' \
-        -e 's/#GRUB_BTRFS_SCRIPT_CHECK=.*/GRUB_BTRFS_SCRIPT_CHECK=no/' \
+        -e 's/#GRUB_BTRFS_SCRIPT_CHECK=.*/GRUB_BTRFS_SCRIPT_CHECK=grub2-script-check/' \
         -e 's/#GRUB_BTRFS_GRUB_DIRNAME=.*/GRUB_BTRFS_GRUB_DIRNAME="\/boot\/grub2"/' \
         config
 
