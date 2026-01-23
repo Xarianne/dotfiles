@@ -10,6 +10,8 @@ import ".just/firewall.just"
 import ".just/setup-snapper.just"
 import ".just/update.just"
 import ".just/verify-state.just"
+import ".just/verify-snapshot.just"
+import ".just/debug-dnf.just"
 
 # Default Menu
 _default:
