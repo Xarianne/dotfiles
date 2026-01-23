@@ -16,12 +16,10 @@ flatpak = [
   { package = "org.localsend.localsend_app", options = { systemwide = true } },
   { package = "org.onlyoffice.desktopeditors", options = { systemwide = true } },
   { package = "page.tesk.Refine", options = { systemwide = true } },
-  { package = "com.visualstudio.code", options = { systemwide = true } },
   { package = "org.gnome.World.PikaBackup", options = { systemwide = true } },
   { package = "io.github.radiolamp.mangojuice", options = { systemwide = true } },
   { package = "io.github.fabrialberio.pinapp", options = { systemwide = true } },
   { package = "io.github.swordpuffin.rewaita", options = { systemwide = true } },
   { package = "io.gitlab.adhami3310.Impression", options = { systemwide = true } },
-  { package = "io.github.vikdevelop.SaveDesktop", options = { systemwide = true } },
   { package = "io.missioncenter.MissionCenter", options = { systemwide = true } },
 ]

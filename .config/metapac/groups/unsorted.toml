@@ -1,1 +1,0 @@
-dnf = ["fedora-packager", "fedpkg", "game-devices-udev", "mock"]
