@@ -1,5 +1,0 @@
-dnf = [
-  "scx-manager",
-  "scx-scheds",
-  "scx-tools",
-]

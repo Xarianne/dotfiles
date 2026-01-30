@@ -1,5 +1,0 @@
-dnf = [
-  "fedora-packager",
-  "fedpkg",
-  "mock"
-]
