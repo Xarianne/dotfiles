@@ -1,4 +1,6 @@
-flatpak = { packages = [
+flatpak = { repos = [
+  { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
+], packages = [
   { name = "system:com.discordapp.Discord", options = { remote = "flathub" } },
   { name = "system:com.mattjakeman.ExtensionManager", options = { remote = "flathub" } },
   { name = "system:com.vysp3r.ProtonPlus", options = { remote = "flathub" } },

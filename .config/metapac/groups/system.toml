@@ -1,5 +1,6 @@
 dnf = { packages = [
   "fastfetch",
   "gum",
+  "rpmconf",
   "sbsigntools",
 ] }
