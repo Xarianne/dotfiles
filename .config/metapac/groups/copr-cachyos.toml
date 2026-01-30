@@ -2,6 +2,7 @@ dnf = { repos = [
   "copr.fedorainfracloud.org/bieszczaders/kernel-cachyos-addons",
 ], packages = [
   "cachyos-settings",
+  "scx-manager",
   "scx-scheds",
   "scx-tools",
 ] }

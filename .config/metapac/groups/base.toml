@@ -369,10 +369,4 @@ dnf = { repos = [
   "xfsprogs",
   "yelp",
   "zip",
-  "zram-generator-defaults",
-] }
-flatpak = { repos = [
-  { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
-], packages = [
-  { name = "system:org.gnome.World.PikaBackup", options = { remote = "flathub" } },
 ] }
