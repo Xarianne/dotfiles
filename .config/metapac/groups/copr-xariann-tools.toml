@@ -1,0 +1,7 @@
+dnf = { repos = [
+  "copr.fedorainfracloud.org/xariann/tools",
+], packages = [
+  "boot-windows",
+  "nautilus-copy-path",
+] }
+

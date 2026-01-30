@@ -1,0 +1,6 @@
+flatpak = { packages = [
+  { name = "system:com.discordapp.Discord", options = { remote = "flathub" } },
+  { name = "system:com.mattjakeman.ExtensionManager", options = { remote = "flathub" } },
+  { name = "system:com.vysp3r.ProtonPlus", options = { remote = "flathub" } },
+  { name = "system:org.altlinux.Tuner", options = { remote = "flathub" } },
+] }
