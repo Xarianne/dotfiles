@@ -16,23 +16,19 @@ enabled_backends = ["dnf", "flatpak"]
 # If this is `true` then the [hostname_groups] config table will be used to
 # decide which group files to use per hostname.
 # Default: false
-hostname_groups_enabled = false
+hostname_groups_enabled = true
 
 # Backends to enable per hostname. These will be merged with the base
 # `enabled_backends` config.
 # Default: None
 [hostname_enabled_backends]
 fedora = ["dnf", "flatpak"]
-laptop = ["arch", "cargo"]
-server = ["apt"]
 
 # Which group files will be used per hostname. Subject to `hostname_groups_enabled`.
 # Relative paths are relative to the groups folder.
 # Default: None
 [hostname_groups]
-pc = ["relative_group", "/etc/absolute_group"]
-laptop = ["relative_group"]
-server = ["relative_group"]
+fedora = ["base", "system", "gaming", "flatpak", "copr-xariann-tools", "copr-cachyos"]
 
 [arch]
 # Since pacman, pamac, paru, pikaur and yay all operate on the same package database
